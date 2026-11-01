@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>Halloween — Você tem coragem?</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100svh; display: grid; place-items: center;
+    overflow: hidden; color: #f5eeee; background:
+      radial-gradient(ellipse at center, #241010 0%, #090606 48%, #020202 100%);
+    font-family: system-ui, Arial, sans-serif; text-align: center;
+  }
+  .intro { width: min(92vw, 620px); padding: 28px; }
+  .pumpkin { font-size: clamp(48px, 12vw, 88px); }
+  h1 { color: #ff5a19; letter-spacing: .08em; text-shadow: 0 0 22px #a21b00; }
+  p { color: #c8baba; line-height: 1.6; }
+  button {
+    margin-top: 22px; border: 1px solid #ff5a19; border-radius: 8px;
+    padding: 16px 28px; background: #8e100b; color: white;
+    font-size: 1.05rem; font-weight: 800; letter-spacing: .06em;
+    cursor: pointer; box-shadow: 0 0 25px #8e100b66;
+  }
+  button:hover { background: #bd1b10; transform: scale(1.03); }
+  .hint { font-size: .82rem; opacity: .65; margin-top: 18px; }
+  #scare {
+    position: fixed; inset: 0; z-index: 5; display: none;
+    place-items: center; background: #050000; overflow: hidden;
+  }
+  #scare.show { display: grid; animation: reveal .12s steps(2,end) both; }
+  .monster {
+    width: min(94vw, 760px); height: min(90svh, 760px);
+    filter: drop-shadow(0 0 32px #f00);
+    animation: lunge .16s infinite alternate;
+  }
+  .scream {
+    position: absolute; bottom: 5vh; left: 0; right: 0;
+    color: #ff1717; font-size: clamp(28px, 7vw, 66px);
+    font-weight: 1000; letter-spacing: .12em;
+    text-shadow: 0 0 16px #f00; animation: shake .08s infinite;
+  }
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lunge {
+    from { transform: scale(.92) rotate(-1deg); }
+    to { transform: scale(1.08) rotate(1deg); }
+  }
+  @keyframes shake {
+    0% { transform: translate(4px, 0); }
+    50% { transform: translate(-4px, 2px); }
+    100% { transform: translate(2px, -2px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .4s !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+<main class="intro" id="intro">
+  <div class="pumpkin" aria-hidden="true">🎃</div>
+  <h1>HALLOWEEN</h1>
+  <p>Há algo escondido nesta página.<br>Você tem coragem de descobrir?</p>
+  <button id="start" type="button">NÃO CLIQUE</button>
+  <p class="hint">Aumente o volume se quiser ouvir o efeito sonoro.</p>
+</main>
+
+<section id="scare" aria-label="Susto de Halloween">
+  <svg class="monster" viewBox="0 0 600 650" role="img" aria-label="Rosto assustador de uma criatura">
+    <defs>
+      <radialGradient id="skin" cx="50%" cy="38%" r="65%">
+        <stop offset="0" stop-color="#b7a39a"/>
+        <stop offset=".48" stop-color="#55403d"/>
+        <stop offset="1" stop-color="#100909"/>
+      </radialGradient>
+      <radialGradient id="eye">
+        <stop offset="0" stop-color="#fff4d0"/>
+        <stop offset=".35" stop-color="#ff2615"/>
+        <stop offset="1" stop-color="#320000"/>
+      </radialGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="10"/></filter>
+    </defs>
+    <ellipse cx="300" cy="340" rx="245" ry="290" fill="#b00000" opacity=".35" filter="url(#blur)"/>
+    <path d="M85 240 Q55 80 185 55 Q300 -5 415 55 Q545 90 515 250 L490 500 Q410 640 300 630 Q170 620 110 500Z" fill="url(#skin)" stroke="#160707" stroke-width="18"/>
+    <path d="M100 220 Q145 90 255 105 L210 170 Q150 165 100 220Z M500 220 Q455 90 345 105 L390 170 Q450 165 500 220Z" fill="#170b0b"/>
+    <path d="M115 255 Q190 185 270 260 Q205 315 125 285Z" fill="#080303"/>
+    <path d="M330 260 Q410 185 485 255 L475 285 Q395 315 330 260Z" fill="#080303"/>
+    <ellipse cx="195" cy="265" rx="43" ry="30" fill="url(#eye)"/>
+    <ellipse cx="405" cy="265" rx="43" ry="30" fill="url(#eye)"/>
+    <ellipse cx="195" cy="265" rx="10" ry="24" fill="#050000"/>
+    <ellipse cx="405" cy="265" rx="10" ry="24" fill="#050000"/>
+    <path d="M290 270 Q255 350 275 390 Q300 415 325 390 Q345 350 310 270Z" fill="#160b0b"/>
+    <path d="M175 430 Q300 385 425 430 Q415 555 300 570 Q185 555 175 430Z" fill="#090303" stroke="#251010" stroke-width="12"/>
+    <path d="M190 435 L225 438 L240 492 L260 440 L290 438 L300 500 L320 438 L350 438 L365 492 L385 438 L410 435" fill="#e5d8c7" stroke="#fff0d9" stroke-width="5"/>
+    <path d="M210 520 Q300 545 390 520" fill="none" stroke="#8c0909" stroke-width="12"/>
+    <path d="M130 340 L90 380 M470 340 L510 380 M150 500 L110 545 M450 500 L490 545" stroke="#160808" stroke-width="13" stroke-linecap="round"/>
+    <path d="M240 120 Q300 80 360 120 M245 150 L220 180 M355 150 L380 180" fill="none" stroke="#1b0c0c" stroke-width="14"/>
+  </svg>
+  <div class="scream">AAAAAAAAH!</div>
+</section>
+
+<script>
+const startButton = document.getElementById("start");
+const intro = document.getElementById("intro");
+const scare = document.getElementById("scare");
+
+function playScareSound() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+  const ctx = new AudioCtx();
+  const now = ctx.currentTime;
+
+  // Ruído curto e grave, sintetizado no navegador (sem arquivo externo).
+  const length = Math.floor(ctx.sampleRate * 1.25);
+  const buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < length; i++) {
+    const fade = Math.pow(1 - i / length, 1.4);
+    data[i] = (Math.random() * 2 - 1) * fade;
+  }
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.setValueAtTime(2200, now);
+  filter.frequency.exponentialRampToValueAtTime(180, now + 1.2);
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.65, now + 0.025);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.25);
+  noise.connect(filter).connect(gain).connect(ctx.destination);
+  noise.start(now);
+  noise.stop(now + 1.25);
+
+  const tone = ctx.createOscillator();
+  const toneGain = ctx.createGain();
+  tone.type = "sawtooth";
+  tone.frequency.setValueAtTime(520, now);
+  tone.frequency.exponentialRampToValueAtTime(65, now + 1.1);
+  toneGain.gain.setValueAtTime(0.0001, now);
+  toneGain.gain.exponentialRampToValueAtTime(0.22, now + 0.03);
+  toneGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
+  tone.connect(toneGain).connect(ctx.destination);
+  tone.start(now);
+  tone.stop(now + 1.1);
+  setTimeout(() => ctx.close(), 1600);
+}
+
+startButton.addEventListener("click", () => {
+  intro.style.display = "none";
+  scare.classList.add("show");
+  playScareSound();
+});
+</script>
+</body>
+</html>
